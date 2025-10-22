@@ -7,8 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: mysql123
       MYSQL_DATABASE: db_sindoorrakshak
-      MYSQL_USER: roadsafety
-      MYSQL_PASSWORD: RoadSafety@HitpL2023
+      MYSQL_USER: sindoor
+      MYSQL_PASSWORD: Sindoor145@HitpL2025
     ports:
       - "3326:3306"
     volumes:
@@ -38,8 +38,8 @@ services:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       MYSQL_DB: db_sindoorrakshak
-      MYSQL_USER: roadsafety
-      MYSQL_PASSWORD: RoadSafety@HitpL2023
+      MYSQL_USER: sindoor
+      MYSQL_PASSWORD: Sindoor145@HitpL2025
     ports:
       - "9102:8080"
     networks:
