@@ -1,0 +1,50 @@
+version: '2.4'
+services:
+  db:
+    image: mysql:5.6
+    container_name: v2sindoorcertificatedb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql123
+      MYSQL_DATABASE: db_sindoorrakshak
+      MYSQL_USER: roadsafety
+      MYSQL_PASSWORD: RoadSafety@HitpL2023
+    ports:
+      - "3326:3306"
+    volumes:
+     - ./sindoor.sql:/docker-entrypoint-initdb.d/sindoor.sql
+     - ./mysql/data:/var/lib/mysql
+     - ./mysql/conf.d:/etc/mysql/conf.d
+    networks:
+      - v2-sindoor-network-certificate
+    healthcheck:
+      test: ["CMD-SHELL", "mysql -u root -pmysql123 -e 'SELECT 1'"]
+      interval: 10s
+      retries: 10
+      start_period: 40s
+
+
+  tomcat:
+    build:
+      context: .
+    image: v2sindoorcertificate:latest
+    container_name: v2sindoorcertificateapp
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    mem_limit: 1024m
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DB: db_sindoorrakshak
+      MYSQL_USER: roadsafety
+      MYSQL_PASSWORD: RoadSafety@HitpL2023
+    ports:
+      - "9102:8080"
+    networks:
+      - v2-sindoor-network-certificate
+
+networks:
+  v2-sindoor-network-certificate:
+    driver: bridge
