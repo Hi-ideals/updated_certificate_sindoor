@@ -95,7 +95,7 @@ environments {
 		dataSource {
 			pooled = true
 			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-			url = "jdbc:mysql://localhost:3306/db_roadsafety?useUnicode=yes&characterEncoding=UTF-8"
+			url = "jdbc:mysql://db:3306/db_roadsafety?useUnicode=yes&characterEncoding=UTF-8&useSSL=false"
 			username = "roadsafety"
 			password = "RoadSafety@HitpL2023"//old:mysql123
 			// dbCreate = "update"
